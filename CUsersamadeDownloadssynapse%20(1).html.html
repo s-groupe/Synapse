@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synapse — Business, Santé, Bourse, Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10151f;
+    --ink-soft:#3a4453;
+    --paper:#f1f0ec;
+    --paper-raised:#ffffff;
+    --teal:#1f9c8f;
+    --teal-deep:#136b62;
+    --gold:#b8923f;
+    --line:#d9d7cd;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(241,240,236,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:700; font-size:20px;}
+  .brand svg{width:26px; height:26px;}
+  .navlinks{display:flex; gap:28px; font-size:14px; font-weight:500;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  .navlinks a:hover{color:var(--teal-deep);}
+
+  /* HERO */
+  .hero{padding:88px 0 72px;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;}
+  .hero h1{font-size:clamp(34px,5vw,54px); line-height:1.08; max-width:11ch;}
+  .hero p.lede{margin-top:20px; font-size:18px; color:var(--ink-soft); max-width:44ch;}
+  .hero-graphic{display:flex; justify-content:center;}
+  .hero-graphic svg{width:100%; max-width:340px; height:auto;}
+  .node-dot{fill:var(--teal);}
+  .node-dot.gold{fill:var(--gold);}
+  .node-line{stroke:var(--ink); stroke-opacity:.18; stroke-width:1.4;}
+  .node-pulse{stroke:var(--teal); stroke-width:1.6; stroke-dasharray:6 10; animation:dash 6s linear infinite;}
+  @keyframes dash{to{stroke-dashoffset:-160;}}
+  @media (prefers-reduced-motion: reduce){ .node-pulse{animation:none;} }
+
+  /* PILLAR NETWORK NAV */
+  .pillars{padding:8px 0 64px;}
+  .pillars-inner{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:2px; overflow:hidden;
+  }
+  .pillar-cell{
+    background:var(--paper-raised); padding:26px 22px; text-decoration:none; color:var(--ink);
+    display:flex; flex-direction:column; gap:8px; min-height:170px; justify-content:flex-start;
+    transition:background .15s;
+  }
+  .pillar-cell:hover{background:#fbfaf6;}
+  .pillar-photo{width:100%; height:120px; object-fit:cover; border-radius:2px; margin-bottom:12px; display:block;}
+  .pillar-icon{width:34px; height:34px; margin-bottom:4px;}
+  .pillar-tag{font-size:13px; color:var(--teal-deep); font-weight:600;}
+  .pillar-cell h3{font-size:20px;}
+  .pillar-cell .desc{font-size:14px; color:var(--ink-soft);}
+
+  /* SECTION SHELL */
+  section.block{padding:64px 0; border-top:1px solid var(--line);}
+  .block-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:32px; flex-wrap:wrap;}
+  .block-head h2{font-size:30px;}
+  .block-head .sub{font-size:14px; color:var(--ink-soft); max-width:38ch;}
+
+  /* AFFILIATE CARD */
+  .affiliate-card{
+    display:grid; grid-template-columns:180px 1fr; gap:28px;
+    background:var(--paper-raised); border:1px solid var(--line); padding:28px; border-radius:3px;
+  }
+  .affiliate-card img{width:100%; height:auto; border-radius:2px;}
+  .affiliate-meta{font-size:13px; color:var(--gold); font-weight:600; margin-bottom:6px;}
+  .affiliate-card h3{font-size:22px; margin-bottom:8px;}
+  .affiliate-card p{color:var(--ink-soft); font-size:15px; max-width:50ch; margin-bottom:18px;}
+  .btn{
+    display:inline-block; background:var(--ink); color:var(--paper); text-decoration:none;
+    padding:11px 20px; font-size:14px; font-weight:600; border-radius:2px; transition:background .15s;
+  }
+  .btn:hover{background:var(--teal-deep);}
+  .btn-outline{
+    display:inline-block; border:1px solid var(--ink); color:var(--ink); text-decoration:none;
+    padding:10px 19px; font-size:14px; font-weight:600; border-radius:2px; margin-left:10px;
+  }
+
+  /* ARTICLE ROWS (santé / bourse / tech) */
+  .article-row{display:grid; grid-template-columns:120px 1fr; gap:24px; padding:20px 0; border-top:1px solid var(--line);}
+  .article-row:first-of-type{border-top:none;}
+  .article-row .kicker{font-size:12px; color:var(--ink-soft); padding-top:4px;}
+  .article-row h4{font-size:18px; margin-bottom:6px;}
+  .article-row p{font-size:14px; color:var(--ink-soft); max-width:56ch;}
+
+  /* PAUSE / AFFILIATE BREAK */
+  .pause-block{background:#e8e4d8;}
+  .pause-head{text-align:center; max-width:46ch; margin:0 auto 36px;}
+  .pause-head .eyebrow{font-size:13px; color:var(--teal-deep); font-weight:600;}
+  .pause-head h2{font-size:28px; margin-top:8px;}
+  .pause-head p{color:var(--ink-soft); font-size:15px; margin-top:10px;}
+  .affiliate-card{max-width:640px; margin:0 auto;}
+
+  /* SHOPIFY */
+  .shop-panel{
+    background:var(--ink); color:var(--paper); padding:44px 40px; border-radius:3px;
+    display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+  }
+  .shop-panel h2{color:var(--paper); font-size:26px;}
+  .shop-panel p{color:#b9c0cc; font-size:14px; margin-top:8px; max-width:42ch;}
+  .shop-panel .btn{background:var(--teal); color:var(--ink);}
+  .shop-panel .btn:hover{background:#28b5a6;}
+
+  footer{padding:48px 0 64px; border-top:1px solid var(--line); font-size:13px; color:var(--ink-soft);}
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-graphic{order:-1;}
+    .pillars-inner{grid-template-columns:repeat(2,1fr);}
+    .affiliate-card{grid-template-columns:1fr;}
+    .affiliate-card img{max-width:160px;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="8" r="4" fill="#1f9c8f"/><circle cx="8" cy="28" r="4" fill="#b8923f"/><circle cx="32" cy="28" r="4" fill="#1f9c8f"/><line x1="20" y1="8" x2="8" y2="28" stroke="#10151f" stroke-opacity="0.4"/><line x1="20" y1="8" x2="32" y2="28" stroke="#10151f" stroke-opacity="0.4"/><line x1="8" y1="28" x2="32" y2="28" stroke="#10151f" stroke-opacity="0.4"/></svg>
+      Synapse
+    </div>
+    <div class="navlinks">
+      <a href="#pillars">Univers</a>
+      <a href="#affiliation">Sélection</a>
+      <a href="#boutique">Boutique</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Là où business, santé, marchés et technologie se connectent.</h1>
+      <p class="lede">Synapse rassemble en un seul endroit ce qui compte : des idées business, des repères santé & bien-être, des lectures sur les marchés, et l'actualité tech — plus une sélection de produits qui valent le détour.</p>
+    </div>
+    <div class="hero-graphic">
+      <svg viewBox="0 0 300 260" fill="none">
+        <line class="node-line" x1="150" y1="40" x2="60" y2="120"/>
+        <line class="node-line" x1="150" y1="40" x2="240" y2="120"/>
+        <line class="node-line" x1="150" y1="40" x2="150" y2="220"/>
+        <line class="node-line" x1="60" y1="120" x2="150" y2="220"/>
+        <line class="node-line" x1="240" y1="120" x2="150" y2="220"/>
+        <line class="node-pulse" x1="60" y1="120" x2="240" y2="120"/>
+        <circle class="node-dot" cx="150" cy="40" r="9"/>
+        <circle class="node-dot gold" cx="60" cy="120" r="9"/>
+        <circle class="node-dot" cx="240" cy="120" r="9"/>
+        <circle class="node-dot gold" cx="150" cy="220" r="9"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="pillars" id="pillars">
+  <div class="wrap pillars-inner">
+    <a class="pillar-cell" href="#affiliation">
+      <img class="pillar-photo" src="https://images.pexels.com/photos/1181408/pexels-photo-1181408.jpeg?cs=tinysrgb&dpr=1&w=500" alt="Équipe business en réunion">
+      <span class="pillar-tag">Business</span>
+      <h3>Lectures & outils</h3>
+      <span class="desc">Livres et ressources pour mieux diriger, vendre, servir.</span>
+    </a>
+    <a class="pillar-cell" href="#sante">
+      <img class="pillar-photo" src="https://images.pexels.com/photos/374672/pexels-photo-374672.jpeg?auto=compress&w=1260&h=750&dpr=1" alt="Femme pratiquant le yoga, bien-être">
+      <span class="pillar-tag">Santé & bien-être</span>
+      <h3>Corps & esprit</h3>
+      <span class="desc">Des repères simples, sans dogme, pour tenir dans la durée.</span>
+    </a>
+    <a class="pillar-cell" href="#bourse">
+      <img class="pillar-photo" src="https://images.pexels.com/photos/7947741/pexels-photo-7947741.jpeg?cs=tinysrgb&dpr=1&w=500" alt="Graphique de marché boursier">
+      <span class="pillar-tag">Bourse & finance</span>
+      <h3>Comprendre les marchés</h3>
+      <span class="desc">Analyses claires, sans jargon inutile.</span>
+    </a>
+    <a class="pillar-cell" href="#tech">
+      <img class="pillar-photo" src="https://images.pexels.com/photos/6842695/pexels-photo-6842695.jpeg?cs=tinysrgb&dpr=1&w=500" alt="Circuit électronique, technologie">
+      <span class="pillar-tag">Technologie</span>
+      <h3>Actualité tech</h3>
+      <span class="desc">Ce qui change vraiment, expliqué simplement.</span>
+    </a>
+  </div>
+</section>
+
+<section class="block" id="sante">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Santé & bien-être</h2>
+      <p class="sub">À paraître : premiers articles de la rubrique.</p>
+    </div>
+    <div class="article-row">
+      <div class="kicker">À venir</div>
+      <div><h4>Le sommeil, premier levier de performance</h4><p>Un article sur les bases d'une bonne récupération, sans promesse magique.</p></div>
+    </div>
+    <div class="article-row">
+      <div class="kicker">À venir</div>
+      <div><h4>Bouger sans se blesser après 30 ans</h4><p>Ce qui change dans la récupération, et comment adapter son rythme.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="bourse">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Bourse & finance</h2>
+      <p class="sub">À paraître : analyses et décryptages de marché.</p>
+    </div>
+    <div class="article-row">
+      <div class="kicker">À venir</div>
+      <div><h4>Lire un bilan sans être analyste</h4><p>Les trois chiffres à regarder avant tout le reste.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="tech">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Technologie</h2>
+      <p class="sub">À paraître : l'actualité tech qui compte vraiment.</p>
+    </div>
+    <div class="article-row">
+      <div class="kicker">À venir</div>
+      <div><h4>Ce qu'il faut retenir de la semaine tech</h4><p>Un résumé sans bruit, sur ce qui change concrètement.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block pause-block" id="affiliation">
+  <div class="wrap">
+    <div class="pause-head">
+      <div class="eyebrow">Une pause dans la lecture</div>
+      <h2>Un livre à garder sous la main</h2>
+      <p>Après ces analyses, une recommandation simple — un ouvrage qui rejoint les thèmes qu'on vient d'aborder, si tu veux prolonger la réflexion.</p>
+    </div>
+    <div class="affiliate-card">
+      <img src="https://m.media-amazon.com/images/I/71QKQ9mXeXL._SY425_.jpg" alt="Couverture du livre The Best Service Is No Service">
+      <div>
+        <div class="affiliate-meta">Livre business</div>
+        <h3>The Best Service Is No Service</h3>
+        <p>Bill Price & David Jaffe expliquent comment libérer les clients du service client classique — les satisfaire davantage tout en maîtrisant les coûts. Si le sujet t'intéresse, <a href="https://amzn.to/4qSd8Iu" target="_blank" rel="noopener" style="color:var(--teal-deep); font-weight:600; text-decoration:underline;">clique ici pour te procurer ce livre</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="boutique">
+  <div class="wrap">
+    <div class="shop-panel">
+      <div>
+        <h2>La boutique Synapse</h2>
+        <p style="color:#b9c0cc; font-size:14px; margin-top:8px; max-width:42ch;">Produits sélectionnés, disponibles directement sur notre boutique. Pour parcourir la collection, <a href="https://cneahz-y1.myshopify.com" target="_blank" rel="noopener" style="color:var(--teal); font-weight:600; text-decoration:underline;">clique ici pour accéder à la boutique</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <span>Synapse — business, santé, bourse, technologie.</span>
+    <span>© 2026 Synapse</span>
+  </div>
+</footer>
+
+</body>
+</html>
